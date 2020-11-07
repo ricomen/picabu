@@ -1,5 +1,30 @@
 html,
 body,
+.wrapper,
+.app,
 #root {
     min-height: 100vh;
+}
+
+.app {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 968px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    grid-auto-rows: 60px 1fr;
+    grid-column-gap: 20px;
+    grid-template-areas: 'app__header app__header' 'app__articles app__sidebar';
+}
+
+.app__header {
+    grid-area: app__header;
+}
+
+.app__articles {
+    grid-area: app__articles;
+}
+
+.app__sidebar {
+    grid-area: app__sidebar;
 }

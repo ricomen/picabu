@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
     return (
-        <header>
-            Шапка сайта
+        <header className='app__header'>
+            Шапка
         </header>
     );
 };
