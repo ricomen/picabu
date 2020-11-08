@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Article = () => {
     return (
         <article className="card">
