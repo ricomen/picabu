@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app';
+import App from './containers/AppContainer';
+
+import { createServer } from 'miragejs';
+import mockServer from './mock/mockapi';
+
+createServer(mockServer);
 
 ReactDOM.render(
   <React.StrictMode>

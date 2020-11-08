@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Sidebar = () => {
     return (
         <aside className='app__sidebar'>
