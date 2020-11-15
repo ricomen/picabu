@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Article from '../article/ArticleComponent';
 
 
-const Articles = (props) => {
-    const { posts, postsLoaded } = props;
+const Articles = ({ posts, postsLoaded }) => {
     return (
         <section className='app__articles'>
-            {
-                !postsLoaded && <div className='loading loading-lg'></div>
+            {postsLoaded 
+                ? posts.map(post => <Article post={post} key={post.id} />)
+                : <div className='loading loading-lg' />
             }
-
-            {
-                postsLoaded && posts.map( post =>  <Article post={post} />)
-            }
-
         </section>
     )
 }

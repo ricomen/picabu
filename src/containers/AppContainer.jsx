@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import 'spectre.css';
 import './app.css';
 
@@ -8,32 +10,32 @@ import Sidebar from '../components/sidebar/SidebarComponent';
 
 import mapper from '../api/mapper';
 
+import { getTitleRequest } from '../actions/titleActions';
+
 class App extends Component {
     state = {
-        title: 'Загрузочка...',
         postsLoaded: false,
         posts: null,
     }
 
     componentDidMount() {
-        fetch('/api/title')
-            .then(response => response.json())
-            .then(json => this.setState(mapper.titleToClient(json)));
+        const { getTitleRequest } = this.props;
+        getTitleRequest();
 
         fetch('/api/posts')
             .then(response => response.json())
             .then(json => {
-                this.setState(mapper.postsToClient(json))
-                this.setState({ postsLoaded: true} );
+                this.setState({ postsLoaded: true, ...mapper.postsToClient(json)} );
             })
     }
 
     render() {
-        const { title, posts, postsLoaded } = this.state;
+        const { posts, postsLoaded } = this.state;
+        const { title: { content: titleContent } } = this.props;
 
         return (
             <>
-                <h1>{title}</h1>
+                <h1>{titleContent}</h1>
 
                 <div className="app">
 
@@ -52,4 +54,10 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        title: state.title
+    }
+}
+
+export default connect(mapStateToProps, { getTitleRequest })(App)
