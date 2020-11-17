@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Logo = () => {
     return (
         <a>
@@ -5,3 +7,5 @@ const Logo = () => {
         </a>
     )
 }
+
+export default Logo;
