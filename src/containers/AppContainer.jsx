@@ -11,26 +11,20 @@ import Sidebar from '../components/sidebar/SidebarComponent';
 import mapper from '../api/mapper';
 
 import { getTitleRequest } from '../actions/titleActions';
+import { getArticlesRequest } from '../actions/articlesActions';
 
 class App extends Component {
-    state = {
-        postsLoaded: false,
-        posts: null,
-    }
 
+    
     componentDidMount() {
-        const { getTitleRequest } = this.props;
+        const { getTitleRequest, getArticlesRequest } = this.props;
         getTitleRequest();
+        getArticlesRequest();
 
-        fetch('/api/posts')
-            .then(response => response.json())
-            .then(json => {
-                this.setState({ postsLoaded: true, ...mapper.postsToClient(json)} );
-            })
     }
 
     render() {
-        const { posts, postsLoaded } = this.state;
+        // console.log(this.props)
         const { title: { content: titleContent } } = this.props;
 
         return (
@@ -41,10 +35,10 @@ class App extends Component {
 
                     <Header />
 
-                    <Articles
+                    {/* <Articles
                         postsLoaded={ postsLoaded }
                         posts={ posts }
-                    />
+                    /> */}
 
                     <Sidebar />
 
@@ -60,4 +54,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getTitleRequest })(App)
+export default connect(mapStateToProps, {
+    getTitleRequest,
+    getArticlesRequest,
+})(App)

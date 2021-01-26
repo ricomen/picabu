@@ -1,35 +1,34 @@
-import { TITLE } from '../actions/titleActions';
+import { ARTICLES } from '../actions/articlesActions';
 
 // начальный стейт редьюсера
 const INIT_STATE = {
-    loading: false,
-    errors: null,
-    content: 'Загрузка...',
+    postsLoaded: false,
+    posts: null,
+    errors: null
 }
 
 // функция для изменения стейта
 export default function data(state = INIT_STATE, { type, payload }) {
-    console.log('title ' + type, payload)
+    console.log('articles ' + type, payload)
 
     switch(type) {
-        case TITLE.REQUEST: {
+        case ARTICLES.REQUEST: {
             return {
                 ...INIT_STATE,
-                loading: true,
                 errors: null,
             }
         }
-        case TITLE.ERROR: {
+        case ARTICLES.ERROR: {
             return {
                 ...INIT_STATE,
                 loading: false,
                 errors: payload.errors,
             }
         }
-        case TITLE.SUCCESS: {
+        case ARTICLES.SUCCESS: {
             return {
                 ...INIT_STATE,
-                loading: false,
+                postsLoaded: true,
                 content: payload.title,
             }
         }
